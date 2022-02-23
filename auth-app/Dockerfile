@@ -1,4 +1,4 @@
-FROM golang:1.16-alpine3.
+FROM golang:1.17.7-alpine3.15
 RUN apk add --no-cache gcc musl-dev upx ca-certificates
 RUN mkdir /app
 ADD . /app
