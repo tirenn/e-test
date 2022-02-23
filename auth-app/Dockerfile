@@ -1,25 +1,12 @@
-# Start from the latest golang base image
-FROM devopsworks/golang-upx:1.16 as build-env
-
-ENV GO111MODULE=on \
-    CGO_ENABLED=0 \
-    GOOS=linux \
-    GOARCH=amd64
-
-# Set the Current Working Directory inside the container
-WORKDIR /auth-app
-
-# Copy go mod and sum files
-COPY go.mod go.sum ./
-
-# Download all dependencies. Dependencies will be cached if the go.mod and go.sum files are not changed
+FROM golang:1.16-alpine3.
+RUN apk add --no-cache gcc musl-dev upx ca-certificates
+RUN mkdir /app
+ADD . /app
+WORKDIR /app
+## Add this go mod download command to pull in any dependencies
 RUN go mod download
-
-# Copy the source from the current directory to the Working Directory inside the container
-COPY . .
-
-# Build the Go app
-RUN go build -ldflags="-s -w" && upx -9 -q ./
-
-# Command to run
-ENTRYPOINT ["/inventory-service"]
+## Our project will now successfully build with the necessary go libraries included.
+RUN go build -o main .
+## Our start command which kicks off
+## our newly created binary executable
+CMD ["/app/main"]
