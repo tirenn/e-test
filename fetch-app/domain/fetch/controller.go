@@ -1,7 +1,6 @@
 package fetch
 
 import (
-	"log"
 	"net/http"
 	"tirenn/test-efishery/fetch-app/dto/http/response"
 
@@ -50,7 +49,6 @@ func (c *Controller) GetJWT(ctx *gin.Context) {
 		return
 	}
 
-	log.Println("adsada")
 	data, err := c.service.GetJWT(token)
 	if err != nil {
 		res.Message = err.Error()
