@@ -36,7 +36,7 @@ func Router() *gin.Engine {
 		{
 			fetchRouter.GET("", middleware.AuthorizeJWT([]string{"staff", "admin"}), fetch.Get)
 
-			agregateRouter := fetchRouter.Group("/agregate")
+			agregateRouter := fetchRouter.Group("/aggregate")
 			{
 				agregateRouter.GET("", middleware.AuthorizeJWT([]string{"admin", "staff"}), fetch.GetAggregate)
 			}
