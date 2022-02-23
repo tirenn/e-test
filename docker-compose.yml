@@ -1,0 +1,18 @@
+# Docker Compose file Reference (https://docs.docker.com/compose/compose-file/)
+
+version: '3.9'
+
+# Define services
+services:
+
+  # Auth App Service
+  auth-app:
+    # Configuration for building the docker image for the service
+    build:
+      context: auth-app/ # Use an image built from the specified dockerfile in the current directory.
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080" # Forward the exposed port 8080 on the container to port 8080 on the host machine
+    restart: unless-stopped
+    environment: # Pass environment variables to the service
+      JWT_SECRET: "secret-key"
