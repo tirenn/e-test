@@ -40,10 +40,10 @@ func ToKomoditasArray(k []models.Komoditas) []Komoditas {
 }
 
 type KomoditasAggregate struct {
-	AreaProvinsi string `json:"area_provinsi"`
-	MaxPrice     string `json:"max_price"`
-	MinPrice     string `json:"min_price"`
-	AveragePrice string `json:"average_price"`
-	MedianPrice  string `json:"median_price"`
-	Data         []Komoditas
+	AreaProvinsi string      `json:"area_provinsi"`
+	MaxPrice     string      `json:"max_price"`
+	MinPrice     string      `json:"min_price"`
+	AveragePrice string      `json:"average_price"`
+	MedianPrice  string      `json:"median_price"`
+	Data         []Komoditas `json:"data"`
 }
