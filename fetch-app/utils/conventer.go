@@ -5,22 +5,22 @@ import (
 	"strconv"
 )
 
-func StringToFloat32(buf string, dval float32) float32 {
+func StringToFloat64(buf string, dval float64) float64 {
 	res, err := strconv.ParseFloat(buf, 32)
 
 	if err == nil {
-		return float32(res)
+		return float64(res)
 	}
 
 	return dval
 }
 
-func Float32ToString(val float32) string {
+func Float64ToString(val float64) string {
 	return strconv.FormatFloat(
 		float64(val),
 		'f',
 		-1,
-		32,
+		64,
 	)
 }
 
