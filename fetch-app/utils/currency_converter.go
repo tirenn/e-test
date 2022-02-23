@@ -16,7 +16,7 @@ type CurrencyConverterResponse struct {
 var cache ttlcache.SimpleCache = ttlcache.NewCache()
 var id string = "usdidr"
 
-func USDToIDR() (result float32, err error) {
+func USDToIDR() (result float64, err error) {
 	url := os.Getenv("BASE_URL_CURRENCY_CONVERTER")
 	if url == "" {
 		url = "https://free.currconv.com/api/v7/convert"
@@ -43,18 +43,19 @@ func USDToIDR() (result float32, err error) {
 	cache.SetTTL(time.Duration(24 * time.Hour))
 	cache.Set(id, currencyConverterResponse.USDIDR)
 
-	result = currencyConverterResponse.USDIDR
+	result = float64(currencyConverterResponse.USDIDR)
 	return
 }
 
-func GetUSDtoIDR() (result float32) {
+func GetUSDtoIDR() (result float64) {
 	res, err := cache.Get(id)
 	if err != nil {
 		result, _ = USDToIDR()
 		return
 	}
 
-	result = res.(float32)
+	result32 := res.(float32)
+	result = float64(result32)
 
 	if result == 0 {
 		result, _ = USDToIDR()
@@ -64,7 +65,7 @@ func GetUSDtoIDR() (result float32) {
 	return
 }
 
-func IDRToUSDConverter(idr float32) (usd float32) {
+func IDRToUSDConverter(idr float64) (usd float64) {
 	conv := GetUSDtoIDR()
 	if conv == 0 {
 		usd = idr / 14000
