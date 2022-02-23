@@ -1,0 +1,309 @@
+openapi: 3.1.0
+info:
+  title: Auth
+  version: "1.0"
+servers:
+  - url: "http://localhost:8080/api"
+paths:
+  /auth/signup:
+    parameters: []
+    post:
+      summary: ""
+      operationId: post-auth-signup
+      responses:
+        "201":
+          $ref: "#/components/responses/Signup"
+        "400":
+          $ref: "#/components/responses/Error"
+        "500":
+          $ref: "#/components/responses/Error"
+      description: Signup Endpoint
+      requestBody:
+        $ref: "#/components/requestBodies/Signup"
+  /auth/login:
+    post:
+      summary: ""
+      operationId: post-auth-login
+      responses:
+        "200":
+          $ref: "#/components/responses/Login"
+        "400":
+          $ref: "#/components/responses/Error"
+        "500":
+          $ref: "#/components/responses/Error"
+      description: Login
+      requestBody:
+        $ref: "#/components/requestBodies/Login"
+  "/auth/token/{token}":
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        "200":
+          $ref: "#/components/responses/Get-Token"
+        "400":
+          $ref: "#/components/responses/Error"
+        "500":
+          $ref: "#/components/responses/Error"
+      operationId: get-auth-token
+    parameters:
+      - schema:
+          type: string
+        name: token
+        in: path
+        required: true
+components:
+  schemas:
+    Auth:
+      description: ""
+      type: object
+      x-examples:
+        example-1:
+          phone: "081234567890"
+          name: tio
+          role: staff
+          password: BpLn
+          timestamp: "2022-02-23T06:23:18.429462916Z"
+      properties:
+        phone:
+          type: string
+          minLength: 1
+        name:
+          type: string
+          minLength: 1
+        role:
+          type: string
+          minLength: 1
+        password:
+          type: string
+          minLength: 1
+        timestamp:
+          type: string
+          minLength: 1
+      required:
+        - phone
+        - name
+        - role
+      examples:
+        - phone: string
+          name: string
+          role: string
+          password: string
+          timestamp: string
+      title: Auth
+  requestBodies:
+    Signup:
+      content:
+        application/json:
+          schema:
+            description: ""
+            type: object
+            properties:
+              phone:
+                type: string
+                minLength: 1
+              name:
+                type: string
+                minLength: 1
+              role:
+                type: string
+                minLength: 1
+            required:
+              - phone
+              - name
+              - role
+            x-examples:
+              example-1:
+                phone: "081234567890"
+                name: tio
+                role: staff
+          examples:
+            example-1:
+              value:
+                phone: "081234567890"
+                name: tio
+                role: staff
+    Login:
+      content:
+        application/json:
+          schema:
+            description: ""
+            type: object
+            properties:
+              phone:
+                type: string
+                minLength: 1
+              password:
+                type: string
+                minLength: 1
+            required:
+              - phone
+              - password
+            x-examples:
+              example-1:
+                phone: "0812345"
+                password: BpLn
+          examples:
+            example-1:
+              value:
+                phone: string
+                password: string
+  responses:
+    Signup:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            description: ""
+            type: object
+            properties:
+              message:
+                type: string
+                minLength: 1
+              data:
+                type: object
+                properties:
+                  phone:
+                    type: string
+                    minLength: 1
+                  name:
+                    type: string
+                    minLength: 1
+                  role:
+                    type: string
+                    minLength: 1
+                  password:
+                    type: string
+                    minLength: 1
+                  timestamp:
+                    type: string
+                    minLength: 1
+                required:
+                  - phone
+                  - name
+                  - role
+                  - password
+                  - timestamp
+            required:
+              - message
+              - data
+            x-examples:
+              example-1:
+                message: Success
+                data:
+                  phone: "081234567890"
+                  name: tio
+                  role: staff
+                  password: BpLn
+                  timestamp: "2022-02-23T06:23:18.429462916Z"
+          examples:
+            example-1:
+              value:
+                message: Success
+                data:
+                  phone: "081234567890"
+                  name: tio
+                  role: staff
+                  password: BpLn
+                  timestamp: "2022-02-23T06:23:18.429462916Z"
+    Login:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            description: ""
+            type: object
+            properties:
+              message:
+                type: string
+                minLength: 1
+              data:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    minLength: 1
+                required:
+                  - token
+            required:
+              - message
+              - data
+            x-examples:
+              example-1:
+                message: Success
+                data:
+                  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZSI6IjA4MTIzNDUiLCJuYW1lIjoidGlvIiwicm9sZSI6InN0YWZmIiwiZXhwIjoxNjQ1NzcwNDU4LCJpYXQiOjE2NDU1OTc2NTh9.3nqRJeN7EsOrYbUqHUgOGJokRSVcG34fFz1-B89NoiY
+          examples:
+            example-1:
+              value:
+                message: string
+                data:
+                  token: string
+    Get-Token:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            description: ""
+            type: object
+            properties:
+              message:
+                type: string
+                minLength: 1
+              data:
+                type: object
+                properties:
+                  phone:
+                    type: string
+                    minLength: 1
+                  name:
+                    type: string
+                    minLength: 1
+                  role:
+                    type: string
+                    minLength: 1
+                required:
+                  - phone
+                  - name
+                  - role
+            required:
+              - message
+              - data
+            x-examples:
+              example-1:
+                message: Success
+                data:
+                  phone: "0812345"
+                  name: tio
+                  role: staff
+          examples:
+            example-1:
+              value:
+                message: string
+                data:
+                  phone: string
+                  name: string
+                  role: string
+    Error:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            description: ""
+            type: object
+            properties:
+              message:
+                type: string
+                minLength: 1
+              data: {}
+            required:
+              - message
+            x-examples:
+              example-1:
+                message: "UNIQUE constraint failed: auths.phone"
+                data: null
+          examples:
+            example-1:
+              value:
+                message: string
+                data: null

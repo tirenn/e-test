@@ -1,0 +1,316 @@
+openapi: 3.1.0
+info:
+  title: Fetch
+  version: "1.0"
+servers:
+  - url: "http://localhost:8081/api"
+paths:
+  /fetch:
+    get:
+      summary: ""
+      operationId: get-user
+      responses:
+        "200":
+          $ref: "#/components/responses/Get"
+        "401":
+          $ref: "#/components/responses/Error"
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: Bearer
+          required: true
+    parameters: []
+  /fetch/aggregate:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        "200":
+          $ref: "#/components/responses/Get-Aggregate"
+        "401":
+          $ref: "#/components/responses/Error"
+      operationId: get-fetch-aggregate
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          required: true
+          description: Bearer
+  "/fetch/token/{token}":
+    parameters:
+      - schema:
+          type: string
+        name: token
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        "200":
+          $ref: "#/components/responses/Get-Token"
+        "500":
+          $ref: "#/components/responses/Error"
+      operationId: get-fetch-token-token
+components:
+  schemas:
+    Komoditas:
+      description: ""
+      type: object
+      properties:
+        uuid:
+          type: string
+        komoditas:
+          type: string
+        area_provinsi:
+          type: string
+        area_kota:
+          type: string
+        size:
+          type: string
+        price:
+          type: string
+        price_usd:
+          type: string
+          minLength: 1
+        tgl_parsed:
+          type: string
+        timestamp:
+          type: string
+      required:
+        - uuid
+        - komoditas
+        - area_provinsi
+        - area_kota
+        - size
+        - price
+        - price_usd
+        - tgl_parsed
+        - timestamp
+      x-examples:
+        example-1:
+          uuid: ""
+          komoditas: ""
+          area_provinsi: ""
+          area_kota: ""
+          size: ""
+          price: ""
+          price_usd: "0"
+          tgl_parsed: ""
+          timestamp: ""
+      examples:
+        - uuid: string
+          komoditas: string
+          area_provinsi: string
+          area_kota: string
+          size: string
+          price: string
+          price_usd: string
+          tgl_parsed: string
+          timestamp: string
+  responses:
+    Get:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            description: ""
+            type: object
+            x-examples:
+              example-1:
+                message: Success
+                data:
+                  - uuid: ""
+                    komoditas: ""
+                    area_provinsi: okodme
+                    area_kota: jawa barat
+                    size: bandung
+                    price: "10"
+                    price_usd: "0.0006966578"
+                    tgl_parsed: ""
+                    timestamp: ""
+                  - uuid: ""
+                    komoditas: "fisheries:83d60541-e2ea-46fd-a4f3-e82b7943fcd2"
+                    area_provinsi: Bandeng
+                    area_kota: JAWA BARAT
+                    size: CIREBON
+                    price: "60"
+                    price_usd: "0.0041799466"
+                    tgl_parsed: "34000"
+                    timestamp: "2022-02-23T06:54:58.241Z"
+            properties:
+              message:
+                type: string
+                minLength: 1
+              data:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  $ref: "#/components/schemas/Komoditas"
+            required:
+              - message
+              - data
+          examples:
+            example-1:
+              value:
+                message: string
+                data:
+                  - uuid: string
+                    komoditas: string
+                    area_provinsi: string
+                    area_kota: string
+                    size: string
+                    price: string
+                    price_usd: string
+                    tgl_parsed: string
+                    timestamp: string
+    Get-Aggregate:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            description: ""
+            type: object
+            x-examples:
+              example-1:
+                message: Success
+                data:
+                  - area_provinsi: ""
+                    max_price: "30000"
+                    min_price: "0"
+                    average_price: "307.6923076923077"
+                    median_price: "0"
+                    data:
+                      - uuid: ""
+                        komoditas: ""
+                        area_provinsi: ""
+                        area_kota: ""
+                        size: ""
+                        price: ""
+                        price_usd: "0"
+                        tgl_parsed: ""
+                        timestamp: ""
+            properties:
+              message:
+                type: string
+                minLength: 1
+              data:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  type: object
+                  properties:
+                    area_provinsi:
+                      type: string
+                    max_price:
+                      type: string
+                      minLength: 1
+                    min_price:
+                      type: string
+                      minLength: 1
+                    average_price:
+                      type: string
+                      minLength: 1
+                    median_price:
+                      type: string
+                      minLength: 1
+                    data:
+                      type: array
+                      uniqueItems: true
+                      minItems: 1
+                      items:
+                        $ref: "#/components/schemas/Komoditas"
+                  required:
+                    - area_provinsi
+                    - max_price
+                    - min_price
+                    - average_price
+                    - median_price
+            required:
+              - message
+              - data
+          examples:
+            example-1:
+              value:
+                message: string
+                data:
+                  - area_provinsi: string
+                    max_price: string
+                    min_price: string
+                    average_price: string
+                    median_price: string
+                    data:
+                      - uuid: string
+                        komoditas: string
+                        area_provinsi: string
+                        area_kota: string
+                        size: string
+                        price: string
+                        price_usd: string
+                        tgl_parsed: string
+                        timestamp: string
+    Error:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            description: ""
+            type: object
+            properties:
+              message:
+                type: string
+                minLength: 1
+              data: {}
+            required:
+              - message
+            x-examples:
+              example-1:
+                message: string
+                data: null
+          examples:
+            example-1:
+              value:
+                message: string
+                data: null
+    Get-Token:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            description: ""
+            type: object
+            properties:
+              message:
+                type: string
+                minLength: 1
+              data:
+                type: object
+                properties:
+                  phone:
+                    type: string
+                    minLength: 1
+                  name:
+                    type: string
+                    minLength: 1
+                  role:
+                    type: string
+                    minLength: 1
+                required:
+                  - phone
+                  - name
+                  - role
+            required:
+              - message
+              - data
+            x-examples:
+              example-1:
+                message: Success
+                data:
+                  phone: "0812345"
+                  name: tio
+                  role: staff
