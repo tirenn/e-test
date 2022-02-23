@@ -39,42 +39,11 @@ func ToKomoditasArray(k []models.Komoditas) []Komoditas {
 	return komoditasArray
 }
 
-func Aggregate(k []Komoditas) (res []Komoditas) {
-	id := make(map[string]bool)
-	areaProvinsi := make(map[string]string)
-
-	if len(k) > 0 {
-		for _, v := range k {
-			id[v.UUID] = true
-			areaProvinsi[v.UUID] = v.AreaProvinsi
-		}
-
-		for i, v := range k {
-			if id[v.UUID] {
-				k[i].AreaProvinsi = areaProvinsi[v.UUID]
-			}
-		}
-	}
-
-	return k
-}
-
-func FindMax(k []Komoditas) (max Komoditas) {
-	max = k[0]
-	for _, d := range k {
-		if d.Price > max.Price {
-			max = d
-		}
-	}
-	return max
-}
-
-func FindMin(k []Komoditas) (min Komoditas) {
-	min = k[0]
-	for _, d := range k {
-		if d.Price < min.Price {
-			min = d
-		}
-	}
-	return min
+type KomoditasAggregate struct {
+	AreaProvinsi string `json:"area_provinsi"`
+	MaxPrice     string `json:"max_price"`
+	MinPrice     string `json:"min_price"`
+	AveragePrice string `json:"average_price"`
+	MedianPrice  string `json:"median_price"`
+	Data         []Komoditas
 }

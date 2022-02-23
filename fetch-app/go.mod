@@ -9,5 +9,6 @@ require (
 	github.com/gin-gonic/gin v1.7.7
 	github.com/go-resty/resty/v2 v2.7.0
 	github.com/google/wire v0.5.0
+	github.com/montanaflynn/stats v0.6.6 // indirect
 	github.com/stretchr/testify v1.7.0
 )
