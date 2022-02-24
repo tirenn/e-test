@@ -38,9 +38,21 @@ Make sure you have **_docker-compose_** installed on your machine, then run comm
 
     docker-compose up
 
+## API Documentation
+
 For the documentation you can see here
 [auth-app](https://github.com/tirenn/test-efishery/blob/main/auth-api.md)
 [fetch-api](https://github.com/tirenn/test-efishery/blob/main/fetch-api.md)
+
+You can use this url to test
+
+Auth App
+
+> https://test-efishery-auth-app.herokuapp.com
+
+Fetch App
+
+> https://test-efishery-fetch-app.herokuapp.com
 
 ## How To Run Test
 
