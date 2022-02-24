@@ -42,6 +42,12 @@ For the documentation you can see here
 [auth-app](https://github.com/tirenn/test-efishery/blob/main/auth-api.md)
 [fetch-api](https://github.com/tirenn/test-efishery/blob/main/fetch-api.md)
 
+## How To Run Test
+
+Move to folder **_/auth-app_** or **_/fetch-app_** then run command
+
+    go test ./domain/...
+
 ## C4 Diagram
 
 ### Context Diagram
