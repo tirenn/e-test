@@ -15,8 +15,8 @@ func (r *RepositoryMock) Create(auth *models.Auth) error {
 	return args.Error(0)
 }
 
-func (r *RepositoryMock) Get(id string) (models.Auth, error) {
-	args := r.Mock.Called(id)
+func (r *RepositoryMock) Login(phone, password string) (models.Auth, error) {
+	args := r.Mock.Called(phone, password)
 	result := args.Get(0)
 	return result.(models.Auth), args.Error(1)
 }
