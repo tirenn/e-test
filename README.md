@@ -41,8 +41,12 @@ Make sure you have **_docker-compose_** installed on your machine, then run comm
 ## API Documentation
 
 For the documentation you can see here
-[auth-app](https://github.com/tirenn/test-efishery/blob/main/auth-api.md)
-[fetch-api](https://github.com/tirenn/test-efishery/blob/main/fetch-api.md)
+
+> [auth-app](https://github.com/tirenn/test-efishery/blob/main/auth-api.md)
+
+> [fetch-api](https://github.com/tirenn/test-efishery/blob/main/fetch-api.md)
+
+Or you can import file **_auth-api.yaml_** and **_fetch-api.yaml_** to Swagger or other API Documentation
 
 You can use this url to test
 
