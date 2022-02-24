@@ -15,7 +15,7 @@ services:
       - "8080:8080" # Forward the exposed port 8080 on the container to port 8080 on the host machine
     restart: unless-stopped
     environment: # Pass environment variables to the service
-      APP_PORT: 8080
+      PORT: 8080
       JWT_SECRET: "secret-key"
   fetch-app:
     # Configuration for building the docker image for the service
@@ -26,7 +26,7 @@ services:
       - "8081:8081" # Forward the exposed port 8080 on the container to port 8080 on the host machine
     restart: unless-stopped
     environment: # Pass environment variables to the service
-      APP_PORT: 8081
+      PORT: 8081
       BASE_URL: "https://stein.efishery.com/v1"
       BASE_URL_CURRENCY_CONVERTER: "https://free.currconv.com/api/v7/convert"
       API_KEY_CURRENCY_CONVERTER: "609e31985ef52d075bef"

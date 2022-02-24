@@ -7,8 +7,8 @@ import (
 
 // GetAddress will return formatted address
 func GetAddress() string {
-	host := os.Getenv("APP_HOST")
-	app_port := os.Getenv("APP_PORT")
+	host := os.Getenv("HOST")
+	app_port := os.Getenv("PORT")
 
 	return fmt.Sprintf("%s:%s", host, app_port)
 }
